@@ -1,7 +1,7 @@
 import netP5.*;
 import oscP5.*;
 
-int dancer_number = 2;  // change for each dancer
+int dancer_number = 4;  // change for each dancer
 
 static final String OSC_ADDRESS = "/ctrl"; // what other people will recognise in the message
 static int RECIEVE_PORT = 4999;
@@ -10,6 +10,9 @@ OscP5 osc;
 
 PShape picture;
 PFont futura;
+
+String[] representations = {"left_hand", "right_hand", "left_arm", "right_arm"};
+int[] states = {1,0,1,0};
 
 void setup() {
   randomSeed(8);
@@ -58,6 +61,19 @@ PShape update_display(String representation, int state) {
   return(picture);
 }
 
-String findPicture(String representation, int state) {
-  return("20");
+String findPicture(String[] representations, int[] states) {
+  String number = "00";
+  switch(states) {
+    case {0,0,0,0}:
+      number = "01";
+      break;
+    case {0,0,0,1}:
+      number = "02";
+      break;
+    case {0,0,1,0}:
+      number = "03";
+      break;
+     // 0,0,1,1. 0,1,0,0. 0,1,0,1. 0,1,1,0. 0,1,1,1. 1,0,0,0. 1,0,0,1. 1,0,1,0. 1,0,1,1. 1,1,0,0. 1,1,0,1. 1,1,1,0. 1,1,1,1
+  }
+  return number;
 }
