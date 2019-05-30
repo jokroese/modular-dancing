@@ -1,7 +1,7 @@
 import netP5.*;
 import oscP5.*;
 
-int dancer_number = 4;  // change for each dancer
+int dancer_number = 4;  // change for each dancer. Indexing (of dancers!) starts at 0.
 
 static final String OSC_ADDRESS = "/ctrl"; // what other people will recognise in the message
 static int RECIEVE_PORT = 4999;
@@ -12,13 +12,13 @@ PShape picture;
 PFont futura;
 
 String[] representations = {"left_hand", "right_hand", "left_arm", "right_arm"};
-int[] states = {1,0,1,0};
+int[] states_array = {0,0,0,1};
 
 void setup() {
   randomSeed(8);
   size(400, 400);
   frameRate(2);
-  
+  strokeWeight(200);
   
   fill(0);
   textSize(32);
@@ -27,7 +27,7 @@ void setup() {
 
   osc = new OscP5(this, RECIEVE_PORT);
 
-  picture = loadShape("diagrams/hands-01.svg");
+  picture = loadShape("diagrams/hands-1.svg");
 }
 
 void draw() {
@@ -44,9 +44,27 @@ void oscEvent(OscMessage oscMessage) {
     int dancer = oscMessage.get(1).intValue();
     if (dancer == dancer_number) {
       String representation = oscMessage.get(3).stringValue();
-      int state = oscMessage.get(5).intValue();
+      int state_int = oscMessage.get(5).intValue();
+      String state = Integer.toString(state_int);
       println("Dancer: " + dancer + ", Representation: " + representation + ", State: " + state);
-      picture = update_display(representation, state);
+      switch(representation) {
+        case "left_hand":
+          states_array[0] = state_int;
+          break;
+        case "right_hand":
+          states_array[1] = state_int;
+          break;
+        case "left_arm":
+          states_array[2] = state_int;
+          break;
+        case "right_arm":
+          states_array[3] = state_int;
+          break;
+        default:
+          break;
+      }
+      update_display(states_array);
+      println(states_array[0]);
     }
     break;
   default:
@@ -54,26 +72,23 @@ void oscEvent(OscMessage oscMessage) {
   }
 }
 
-PShape update_display(String representation, int state) {
-  String picture_number = findPicture(representation, state);
+void update_display(int[] states) {
+  int picture_number = findPicture(states);
   String picture_name = "diagrams/hands-" + picture_number + ".svg";
   picture = loadShape(picture_name);
-  return(picture);
 }
 
-String findPicture(String[] representations, int[] states) {
-  String number = "00";
-  switch(states) {
-    case {0,0,0,0}:
-      number = "01";
-      break;
-    case {0,0,0,1}:
-      number = "02";
-      break;
-    case {0,0,1,0}:
-      number = "03";
-      break;
-     // 0,0,1,1. 0,1,0,0. 0,1,0,1. 0,1,1,0. 0,1,1,1. 1,0,0,0. 1,0,0,1. 1,0,1,0. 1,0,1,1. 1,1,0,0. 1,1,0,1. 1,1,1,0. 1,1,1,1
-  }
-  return number;
+int findPicture(int[] states) {
+  int number = 0;
+    
+    for (int i = 0; i < states.length; i++) {
+      number = number + (2^(3-i))*states[i];
+    }
+    
+    println(number);
+    //if (states == {0,0,0,0}) {
+    //  number = "00"
+    //}
+    
+  return(number);
 }
