@@ -10,14 +10,10 @@ Modular dancing is a system for creating rule-based modular choreography.
 
 Open processing. Sketch > Import Library > Add Library. Then type in 'oscP5' in 'Libraries'. Click 'Install'.
 
-3. Import netP5
-
-Same as step 2. but with 'netP5'.
-
-4. Download (or clone) this repository.
+3. Download (or clone) this repository.
 
 ### For the director
-   
+
 4. Open 'master/master.pde'.
 
 5. Run.
