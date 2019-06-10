@@ -13,7 +13,7 @@ GOL gol;
 
 void setup() {
   randomSeed(8);
-  size(400, 400);
+  size(800, 800);
   frameRate(2);
 
   osc = new OscP5(this, RECIEVE_PORT);
