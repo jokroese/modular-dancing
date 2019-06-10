@@ -1,7 +1,7 @@
 import netP5.*;
 import oscP5.*;
 
-int dancer_number = 6;  // change for each dancer. Indexing (of dancers!) starts at 0.
+int dancer_number = 4;  // change for each dancer. Indexing (of dancers!) starts at 0.
 
 static final String OSC_ADDRESS = "/ctrl"; // what other people will recognise in the message
 static int RECIEVE_PORT = 4999;
@@ -16,7 +16,7 @@ int[] states_array = {0,0,0,1};
 
 void setup() {
   randomSeed(8);
-  size(800, 800);
+  size(400, 400);
   frameRate(2);
   strokeWeight(200);
   
@@ -32,7 +32,7 @@ void setup() {
 
 void draw() {
   background(#D3F1FF);
-  shape(picture, 0, 0, 800, 800);
+  shape(picture, 0, 0, 400, 400);
   text("Dancer: " + dancer_number, 20, 40);
 }
 
@@ -86,6 +86,9 @@ int findPicture(int[] states) {
     }
     
     println(number);
+    //if (states == {0,0,0,0}) {
+    //  number = "00"
+    //}
     
   return(number);
 }
