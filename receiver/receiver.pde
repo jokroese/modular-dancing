@@ -1,7 +1,7 @@
 import netP5.*;
 import oscP5.*;
 
-int dancer_number = 4;  // change for each dancer. Indexing (of dancers!) starts at 0.
+int dancer_number = 5;  // change for each dancer. Indexing (of dancers!) starts at 0.
 
 static final String OSC_ADDRESS = "/ctrl"; // what other people will recognise in the message
 static int RECIEVE_PORT = 4999;

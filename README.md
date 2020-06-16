@@ -14,7 +14,7 @@ Open processing. Sketch > Import Library > Add Library. Then type in 'oscP5' in 
 
 ### For the director
 
-4. Open 'master/master.pde'.
+4. Open 'sender/sender.pde'.
 
 5. Run.
 
@@ -28,11 +28,11 @@ Open processing. Sketch > Import Library > Add Library. Then type in 'oscP5' in 
 
 #### To practice
 
-If a dancer would like to practice their choreography by themself, they can run both the master and receiver file.
+If a dancer would like to practice their choreography by themself, they can run both the sender and receiver file.
 
 ## What's in this repository
 
-### Master file
+### Sender file
 
 Runs Game of Life simulation. Sends out OSC messages
 
